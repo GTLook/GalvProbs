@@ -1,39 +1,32 @@
 //given cc numbers
 var ccNums = ['4916-2600-1804-0530', '4779-252888-3972', '4252-278893-7978', '4556-4242-9283-2260'];
 
-var count = 0;
+//var count = 0;
 var ans = 0;
 var highScore = 0;
 
-do{
-     //removes '-' from array string
-     var stringNum = ccNums[count].replace(/-/g,'0');
+for(var count = 0; count < ccNums.length;count++){
+     //removes '-' from array string and splits into an array of the ccNumbers
+     var stringNum = ccNums[count].replace(/-/g,'0').split("");
 
-     //split array string
-     var split = stringNum.split("");
-
-     //convert array into numbers
-     for(var i=0; i<split.length; i++) {
-          split[i] = parseInt(split[i], 10);
+     //convert string array into numbers
+     for(var i=0; i<stringNum.length; i++) {
+          stringNum[i] = parseInt(stringNum[i], 10);
      }
 
      //addition of array using reduce
-     var sum = split.reduce( function(total, a) {
+     var sum = stringNum.reduce( function(total, a) {
           return total +  a
      });
 
-     //logic to check if high number
+     //logic to check if high number, updates highscore if higher
      if (sum >= highScore) {
-          ans = count;
+          ans = ccNums[count];
+          highScore = sum;
      }
-
-     //count +1 for next number in string
-     count++;
-
-} while (count<ccNums.length);
-
+}
 //returns cc number with highest added number!
-console.log(ccNums[ans])
+console.log(ans)
 
 //html shell
 
